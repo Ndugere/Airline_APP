@@ -6,16 +6,34 @@
   <li>Origin: {{ flight.origin }}</li>
   <li>Destination: {{ flight.destination }}</li>
   <li>Duration: {{ flight.duration }}</li>
-
 </ul>
+
 <h3>Passengers in this Flight</h3>
 <ul>
-    {% for Passenger in    passengers %}
-        <li>{{ Passenger.name }} </li>
+    {% for passenger in passengers %}
+        <li>{{ passenger.name }}</li>
     {% empty %}
-        <p> There is no one in this flight </p>
+        <p>There is no one in this flight</p>
     {% endfor %}
 </ul>
-<a href="{% url 'index' %}"> Go back to Flights page</a>
 
+<h3>Add Passenger</h3>
+{% if non_passengers %}
+<form action="{% url 'book' flight.id %}" method="post">
+    {% csrf_token %}
+    <label for="passenger">Choose a passenger:</label>
+    <select name="passenger" id="passenger" required>
+        <option value="" disabled selected>-- Select a passenger --</option>
+        {% for passenger in non_passengers %}
+            <option value="{{ passenger.id }}">{{ passenger.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Add to Flight</button>
+</form>
+<p></p> <!-- spacer -->
+{% else %}
+<p>No passengers to add</p>
+{% endif %}
+
+<a href="{% url 'index' %}">Go back to Flights page</a>
 {% endblock %}
