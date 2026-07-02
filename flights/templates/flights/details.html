@@ -12,6 +12,11 @@
 <ul>
     {% for passenger in passengers %}
         <li>{{ passenger.name }}</li>
+                <form action="{% url 'remove_passenger' flight.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="passenger" value="{{ passenger.id }}">
+                <button type="submit">Remove</button>
+            </form>
     {% empty %}
         <p>There is no one in this flight</p>
     {% endfor %}
