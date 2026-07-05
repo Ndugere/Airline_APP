@@ -10,6 +10,14 @@ def list_passengers(request):
         "passengers": Passenger.objects.all()
     })
 
+def add_passenger(request):
+    if request.method == "POST":
+        passenger_name = request.POST["passenger_name"]
+        Passenger.objects.create(name = passenger_name)
+        return HttpResponseRedirect(reverse("list_passengers"))
+
+
+
 def index(request):
     return render( request,
         "flights/index.html", {

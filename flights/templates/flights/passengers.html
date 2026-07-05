@@ -8,7 +8,14 @@
 {% empty %}
 <p> No Passengers in the database </p>
 {% endfor %}
-
+<hr>
+<h3>Add Passenger</h3>
+<form action="{% url 'add_passenger' %}" method="post">
+    {% csrf_token %}
+    <label for="passenger_name">Passenger Name: </label>
+    <input type="text"  id="passenger_name" name="passenger_name" required> 
+    <button type="submit">Add Passenger</button>
+</form>
 <hr>
 <a href="{% url 'index' %}"> See available flights</a>
 {% endblock %}
