@@ -1,0 +1,20 @@
+{% extends "flights/base.html" %}
+
+{% block body %}
+<h3>Edit Airport </h3>
+
+{% if message %}
+
+    <h6> {{ message }} </h6>
+{% endif %}
+
+<form action="{% url 'edit_airport' airport.id %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="code"  id="code" value="{{ airport.code }}" required autofocus>
+    <input type="text" name="city" id="city" value="{{ airport.city }}" required>
+    <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+        <button type="submit">Save changes</button>
+        <a href="{% url 'list_airports' %}"><button type="button">Go back to All Airports</button></a>
+    </div>
+</form>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Airport, Flight, Passenger
@@ -50,6 +50,25 @@ def delete_airport(request, airport_id):
         if airport_to_delete:
             airport_to_delete.delete()
         return HttpResponseRedirect(reverse("list_airports"))
+
+def edit_airport(request, airport_id):
+    airport_to_edit = get_object_or_404(Airport, pk= airport_id)
+    if request.method ==  "POST":
+        code = request.POST.get("code")
+        city = request.POST.get("city")
+        if code and city:
+            airport_to_edit.code = code
+            airport_to_edit.city = city
+            airport_to_edit.save()
+            return HttpResponseRedirect(reverse("list_airports"))
+        return render(request, "flights/edit_airport.html", {
+            "airport": airport_to_edit,
+            "messege": "Both code and city are required"
+        })
+    return render(request, "flights/edit_airport.html", {
+        "airport": airport_to_edit
+    })
+
 
 ### Views about Flights
 def index(request):

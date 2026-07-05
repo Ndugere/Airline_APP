@@ -4,10 +4,13 @@
 <h3>All Airports </h3>
 {% for airport in airports %}
 <p> {{ airport.code }} Airport in {{ airport.city }}  </p>
-<form action="{% url 'delete_airport' airport.id %}" method="post">
-    {%csrf_token %}
-    <button type="submit">Delete</button>
-</form>
+<div style="display: flex; gap: 10px;">
+    <form action="{% url 'delete_airport' airport.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    <a href="{% url 'edit_airport' airport.id %}"><button type="button">Edit</button></a>
+</div>
 {% empty %}
 <p>No Airport in the database</p>
 {% endfor %}

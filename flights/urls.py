@@ -12,6 +12,7 @@ urlpatterns = [
     path("airports", views.list_airports, name="list_airports"),
     path("add_airport", views.add_airport, name= "add_airport"),
     path("delete_airport/<int:airport_id>", views.delete_airport, name= "delete_airport"),
+    path("edit_airport/<int:airport_id>", views.edit_airport, name= "edit_airport"),
 
     #flights routes
     path("", views.index, name= "index"),
