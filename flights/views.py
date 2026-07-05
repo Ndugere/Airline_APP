@@ -32,6 +32,12 @@ def edit_passenger(request, passenger_id):
         "passenger": passenger_to_edit
     })
 
+### views about Airports
+def list_airports(request):
+    return render(request, "flights/list_airport.html", {
+        "airports": Airport.objects.all()
+    })
+
 ### Views about Flights
 def index(request):
     return render( request,

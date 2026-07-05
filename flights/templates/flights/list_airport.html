@@ -1,0 +1,12 @@
+{% extends "flights/base.html" %}
+
+{% block body %}
+<h3>All Airports </h3>
+{% for airport in airports %}
+<p> {{ airport.code }} Airport in {{ airport.city }}  </p>
+{% empty %}
+<p>No Airport in the database</p>
+{% endfor %}
+<hr>
+<a href="{% url 'index' %}"> Go to flights page</a>
+{%endblock%}

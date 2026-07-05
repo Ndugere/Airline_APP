@@ -8,6 +8,9 @@ urlpatterns = [
     path("delete_passenger/<int:passenger_id>", views.delete_passenger, name = "delete_passenger"),
     path("edit_passenger/<int:passenger_id>", views.edit_passenger, name="edit_passenger"),
 
+    #Airports routes
+    path("airports", views.list_airports, name="list_airports"),
+
     #flights routes
     path("", views.index, name= "index"),
     path("<int:flight_id>", views.details, name="details"),
