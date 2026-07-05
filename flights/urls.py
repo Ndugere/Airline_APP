@@ -5,6 +5,7 @@ urlpatterns = [
     #passengers routes
     path("passengers", views.list_passengers, name = "list_passengers"),
     path("add_passenger", views.add_passenger, name="add_passenger"),
+    path("delete_passenger/<int:passenger_id>", views.delete_passenger, name = "delete_passenger"),
 
     #flights routes
     path("", views.index, name= "index"),

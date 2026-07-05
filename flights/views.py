@@ -16,6 +16,12 @@ def add_passenger(request):
         Passenger.objects.create(name = passenger_name)
         return HttpResponseRedirect(reverse("list_passengers"))
 
+def delete_passenger(request, passenger_id):
+    if request.method == "POST":
+        passenger_to_delete = Passenger.objects.get(pk = passenger_id)
+        passenger_to_delete.delete()
+        return HttpResponseRedirect(reverse("list_passengers"))
+
 
 
 def index(request):
