@@ -5,10 +5,13 @@
 
 {% for passenger in passengers %}
  <p>{{passenger.name}}</p>
- <form action="{% url 'delete_passenger' passenger.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Delete Passenger</button>
- </form>
+ <div style="display: flex; gap: 10px;">
+    <form action="{% url 'delete_passenger' passenger.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete Passenger</button>
+    </form>
+    <a href="{% url 'edit_passenger' passenger.id %}"><button type="button">Edit Passenger</button></a>
+ </div>
 {% empty %}
 <p> No Passengers in the database </p>
 {% endfor %}

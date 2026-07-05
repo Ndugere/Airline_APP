@@ -4,7 +4,7 @@ from django.urls import reverse
 from .models import Airport, Flight, Passenger
 # Create your views here.
 
-
+### Views about Passengers
 def list_passengers(request):
     return render(request, "flights/passengers.html", {
         "passengers": Passenger.objects.all()
@@ -22,8 +22,17 @@ def delete_passenger(request, passenger_id):
         passenger_to_delete.delete()
         return HttpResponseRedirect(reverse("list_passengers"))
 
+def edit_passenger(request, passenger_id):
+    passenger_to_edit = Passenger.objects.get(pk = passenger_id)
+    if request.method == "POST":
+        passenger_to_edit.name = request.POST["new_name"]
+        passenger_to_edit.save()
+        return HttpResponseRedirect(reverse("list_passengers"))
+    return render(request, "flights/edit_passenger.html", {
+        "passenger": passenger_to_edit
+    })
 
-
+### Views about Flights
 def index(request):
     return render( request,
         "flights/index.html", {
