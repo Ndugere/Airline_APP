@@ -8,7 +8,7 @@
     {% empty %}
         <h3> No flights at the moment</h3>
     {% endfor %}
-
 </ul>
-
+<hr>
+<a href="{% url 'list_passengers' %}"> See all Passengers</a>
 {% endblock %}

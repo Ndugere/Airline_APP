@@ -1,0 +1,14 @@
+{% extends "flights/base.html" %}
+
+
+{% block body %}
+
+{% for passenger in passengers %}
+ <p>{{passenger.name}}</p>
+{% empty %}
+<p> No Passengers in the database </p>
+{% endfor %}
+
+<hr>
+<a href="{% url 'index' %}"> See available flights</a>
+{% endblock %}

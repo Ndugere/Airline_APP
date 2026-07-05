@@ -4,6 +4,12 @@ from django.urls import reverse
 from .models import Airport, Flight, Passenger
 # Create your views here.
 
+
+def list_passengers(request):
+    return render(request, "flights/passengers.html", {
+        "passengers": Passenger.objects.all()
+    })
+
 def index(request):
     return render( request,
         "flights/index.html", {
