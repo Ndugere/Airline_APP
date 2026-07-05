@@ -37,6 +37,13 @@ def list_airports(request):
     return render(request, "flights/list_airport.html", {
         "airports": Airport.objects.all()
     })
+def add_airport(request):
+    if request.method == "POST":
+        code, city = request.POST["code"], request.POST["city"]
+        if code and city:
+            Airport.objects.create(code = code, city = city)
+        return HttpResponseRedirect(reverse("list_airports"))
+    
 
 ### Views about Flights
 def index(request):

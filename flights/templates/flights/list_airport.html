@@ -8,5 +8,14 @@
 <p>No Airport in the database</p>
 {% endfor %}
 <hr>
+<form action="{% url 'add_airport' %}" method="post">
+    {% csrf_token %}
+    <label for="code">Airport's Code: </label>
+    <input type="text" id="code" name="code" required>
+     <label for="city">Airport's City: </label>
+    <input type="text" id="city" name="city" required>
+    <button type="submit">Save Airport </button>
+</form>
+<hr>
 <a href="{% url 'index' %}"> Go to flights page</a>
 {%endblock%}
