@@ -11,10 +11,11 @@ urlpatterns = [
     #Airports routes
     path("airports", views.list_airports, name="list_airports"),
     path("add_airport", views.add_airport, name= "add_airport"),
+    path("delete_airport/<int:airport_id>", views.delete_airport, name= "delete_airport"),
 
     #flights routes
     path("", views.index, name= "index"),
-    
+
     path("<int:flight_id>", views.details, name="details"),
     path("<int:flight_id>/book", views.book, name="book"),
     path("<int:flight_id>/remove_passenger", views.remove_passenger, name= "remove_passenger")

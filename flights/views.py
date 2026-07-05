@@ -43,7 +43,13 @@ def add_airport(request):
         if code and city:
             Airport.objects.create(code = code, city = city)
         return HttpResponseRedirect(reverse("list_airports"))
-    
+
+def delete_airport(request, airport_id):
+    if request.method == "POST":
+        airport_to_delete = Airport.objects.get(pk = airport_id)
+        if airport_to_delete:
+            airport_to_delete.delete()
+        return HttpResponseRedirect(reverse("list_airports"))
 
 ### Views about Flights
 def index(request):
