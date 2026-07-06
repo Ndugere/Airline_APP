@@ -99,4 +99,40 @@ def remove_passenger(request, flight_id):
         passenger = Passenger.objects.get(pk = int(request.POST["passenger"]))
         passenger.flights.remove(flight)
         return HttpResponseRedirect(reverse("details", args=(flight_id,) ))
+    
+
+def safe_int(value):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+def add_flight(request):
+    if request.method == "POST":
+        origin_id = safe_int(request.POST.get("origin_id"))
+        destination_id = safe_int(request.POST.get("destination_id"))
+        duration = safe_int(request.POST.get("duration"))
+
+        if origin_id and destination_id and duration and origin_id != destination_id and duration > 0:
+            origin = get_object_or_404(Airport, pk=origin_id)
+            destination = get_object_or_404(Airport, pk=destination_id)
+            Flight.objects.create(origin=origin, destination=destination, duration=duration)
+            return HttpResponseRedirect(reverse("index"))
+
+        return render(request, "flights/add_flight.html", {
+            "message": "Invalid input: duration must be positive and origin/destination must differ.",
+            "airports": Airport.objects.all()
+        })
+
+    return render(request, "flights/add_flight.html", {
+        "airports": Airport.objects.all(),
+        "message": ""
+    })
+
+def delete_flight(request, flight_id):
+    if request.method =="POST":
+        flight_to_delete = get_object_or_404(Flight, pk=flight_id)
+        flight_to_delete.delete()
+    return HttpResponseRedirect(reverse("index"))
+
 

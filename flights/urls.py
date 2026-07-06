@@ -16,7 +16,7 @@ urlpatterns = [
 
     #flights routes
     path("", views.index, name= "index"),
-
+    path("add_flight", views.add_flight, name="add_flight"),
     path("<int:flight_id>", views.details, name="details"),
     path("<int:flight_id>/book", views.book, name="book"),
     path("<int:flight_id>/remove_passenger", views.remove_passenger, name= "remove_passenger")
