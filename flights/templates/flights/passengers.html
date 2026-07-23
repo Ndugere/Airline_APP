@@ -3,6 +3,10 @@
 
 {% block body %}
 
+{% if message %}
+    <h6>{{ message }}</h6>
+{% endif %}
+
 {% for passenger in passengers %}
  <p>{{passenger.name}}</p>
  <div style="display: flex; gap: 10px;">
